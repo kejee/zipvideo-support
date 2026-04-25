@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZipVideo Support</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --primary: #6366F1;
+      --primary-light: #818CF8;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text: #1E293B;
+      --text-secondary: #64748B;
+      --border: #E2E8F0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 40px 0 20px;
+    }
+
+    .header .app-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: white;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .header .subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Language Switcher */
+    .lang-switch {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .lang-btn {
+      padding: 8px 20px;
+      border: 2px solid var(--border);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--card-bg);
+      color: var(--text-secondary);
+    }
+
+    .lang-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .lang-btn.active {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Content */
+    .content {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+
+    /* Markdown Styles */
+    .markdown-body h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .markdown-body h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 24px 0 12px;
+    }
+
+    .markdown-body h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 16px 0 8px;
+    }
+
+    .markdown-body p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .markdown-body ul, .markdown-body ol {
+      font-size: 15px;
+      color: var(--text-secondary);
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    .markdown-body li {
+      margin-bottom: 6px;
+    }
+
+    .markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 12px 0;
+    }
+
+    .markdown-body th {
+      background: var(--primary);
+      color: white;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .markdown-body td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .markdown-body tr:last-child td { border-bottom: none; }
+
+    .markdown-body hr {
+      border: none;
+      border-top: 2px solid var(--border);
+      margin: 24px 0;
+    }
+
+    .markdown-body blockquote {
+      background: #FEF3C7;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #92400E;
+      margin: 12px 0;
+      border-left: 4px solid #F59E0B;
+    }
+
+    .markdown-body strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .markdown-body a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .markdown-body a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 30px 0;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header h1 { font-size: 20px; }
+      .content { padding: 16px; }
+      .markdown-body h1 { font-size: 22px; }
+      .markdown-body h2 { font-size: 18px; }
+      .markdown-body table { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="app-icon">🎬</div>
+      <h1 id="app-title">ZipVideo</h1>
+      <p class="subtitle" id="subtitle">Support & Help</p>
+    </div>
+
+    <!-- Language Switcher -->
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="zh">中文</button>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <div class="markdown-body" id="markdown-content">
+        <div class="loading">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p id="footer-text">ZipVideo Development Team</p>
+      <p style="margin-top:16px;">
+        <a href="privacy.html" id="privacy-link">Privacy Policy</a> &nbsp;|&nbsp;
+        <a href="https://github.com/kejee/zipvideo-support">GitHub</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Language configuration
+    const langConfig = {
+      en: {
+        title: 'ZipVideo',
+        subtitle: 'Support & Help',
+        footer: 'ZipVideo Development Team',
+        privacyLink: 'Privacy Policy',
+        mdFile: 'support_en.md'
+      },
+      zh: {
+        title: '压点视频（ZipVideo）',
+        subtitle: '支持与帮助',
+        footer: '压点视频开发团队',
+        privacyLink: '隐私政策',
+        mdFile: 'support_zh.md'
+      }
+    };
+
+    let currentLang = 'en';
+
+    // Load markdown file
+    async function loadMarkdown(lang) {
+      const config = langConfig[lang];
+      const contentEl = document.getElementById('markdown-content');
+      
+      // Update UI text
+      document.getElementById('app-title').textContent = config.title;
+      document.getElementById('subtitle').textContent = config.subtitle;
+      document.getElementById('footer-text').textContent = config.footer;
+      document.getElementById('privacy-link').textContent = config.privacyLink;
+      document.documentElement.lang = lang;
+
+      // Show loading
+      contentEl.innerHTML = '<div class="loading">Loading...</div>';
+
+      try {
+        const response = await fetch(config.mdFile);
+        if (!response.ok) throw new Error('File not found');
+        const markdown = await response.text();
+        contentEl.innerHTML = marked.parse(markdown);
+      } catch (error) {
+        contentEl.innerHTML = `<p style="color:#EF4444;text-align:center;">Error loading content. Please try again.</p>`;
+        console.error('Error loading markdown:', error);
+      }
+    }
+
+    // Language button click handler
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        if (lang === currentLang) return;
+        
+        // Update active button
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        currentLang = lang;
+        loadMarkdown(lang);
+      });
+    });
+
+    // Initial load
+    loadMarkdown(currentLang);
+  </script>
+</body>
+</html>
