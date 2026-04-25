@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZipVideo Support</title>
+  <title>ZipVideo Terms of Service</title>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     :root {
@@ -122,81 +122,15 @@
       margin: 24px 0 12px;
     }
 
-    .markdown-body h3 {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--text);
-      margin: 16px 0 8px;
-    }
-
     .markdown-body p {
       font-size: 15px;
       color: var(--text-secondary);
       margin-bottom: 12px;
     }
 
-    .markdown-body ul, .markdown-body ol {
-      font-size: 15px;
-      color: var(--text-secondary);
-      padding-left: 20px;
-      margin-bottom: 12px;
-    }
-
-    .markdown-body li {
-      margin-bottom: 6px;
-    }
-
-    .markdown-body table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-      margin: 12px 0;
-    }
-
-    .markdown-body th {
-      background: var(--primary);
-      color: white;
-      padding: 10px 12px;
-      text-align: left;
-      font-weight: 600;
-    }
-
-    .markdown-body td {
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--border);
-      color: var(--text-secondary);
-    }
-
-    .markdown-body tr:last-child td { border-bottom: none; }
-
-    .markdown-body hr {
-      border: none;
-      border-top: 2px solid var(--border);
-      margin: 24px 0;
-    }
-
-    .markdown-body blockquote {
-      background: #FEF3C7;
-      border-radius: 8px;
-      padding: 12px 16px;
-      font-size: 14px;
-      color: #92400E;
-      margin: 12px 0;
-      border-left: 4px solid #F59E0B;
-    }
-
     .markdown-body strong {
       color: var(--text);
       font-weight: 600;
-    }
-
-    .markdown-body a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    .markdown-body a:hover {
-      text-decoration: underline;
     }
 
     /* Footer */
@@ -233,79 +167,65 @@
       .content { padding: 16px; }
       .markdown-body h1 { font-size: 20px; }
       .markdown-body h2 { font-size: 18px; }
-      .markdown-body table { font-size: 12px; }
-      .app-icon { width: 64px; height: 64px; }
+      .app-icon { width: 636px; height: 64px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
     <div class="header">
       <div class="app-icon">
         <img src="assets/logo.png" alt="ZipVideo Logo">
       </div>
       <h1 id="app-title">ZipVideo</h1>
-      <p class="subtitle" id="subtitle">Support & Help</p>
+      <p class="subtitle" id="subtitle">Terms of Service</p>
     </div>
 
-    <!-- Language Switcher -->
     <div class="lang-switch">
       <button class="lang-btn active" data-lang="en">English</button>
       <button class="lang-btn" data-lang="zh">中文</button>
     </div>
 
-    <!-- Content -->
     <div class="content">
       <div class="markdown-body" id="markdown-content">
         <div class="loading">Loading...</div>
       </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
       <p id="footer-text">ZipVideo Development Team</p>
       <p style="margin-top:16px;">
-        <a href="privacy.html" id="privacy-link">Privacy Policy</a> &nbsp;|&nbsp;
-        <a href="https://github.com/kejee/zipvideo-support">GitHub</a>
+        <a href="index.html">Home</a> &nbsp;|&nbsp;
+        <a href="privacy.html">Privacy Policy</a>
       </p>
     </div>
   </div>
 
   <script>
-    // Language configuration
     const langConfig = {
       en: {
         title: 'ZipVideo',
-        subtitle: 'Support & Help',
+        subtitle: 'Terms of Service',
         footer: 'ZipVideo Development Team',
-        privacyLink: 'Privacy Policy',
-        mdFile: 'support_en.md'
+        mdFile: 'terms_of_service.md'
       },
       zh: {
-        title: '压点视频（ZipVideo）',
-        subtitle: '支持与帮助',
+        title: '压点视频 (ZipVideo)',
+        subtitle: '服务条款',
         footer: '压点视频开发团队',
-        privacyLink: '隐私政策',
-        mdFile: 'support_zh.md'
+        mdFile: 'terms_of_service_zh.md'
       }
     };
 
     let currentLang = 'en';
 
-    // Load markdown file
     async function loadMarkdown(lang) {
       const config = langConfig[lang];
       const contentEl = document.getElementById('markdown-content');
-      
-      // Update UI text
       document.getElementById('app-title').textContent = config.title;
       document.getElementById('subtitle').textContent = config.subtitle;
       document.getElementById('footer-text').textContent = config.footer;
-      document.getElementById('privacy-link').textContent = config.privacyLink;
       document.documentElement.lang = lang;
-
-      // Show loading
       contentEl.innerHTML = '<div class="loading">Loading...</div>';
 
       try {
@@ -315,26 +235,20 @@
         contentEl.innerHTML = marked.parse(markdown);
       } catch (error) {
         contentEl.innerHTML = `<p style="color:#EF4444;text-align:center;">Error loading content. Please try again.</p>`;
-        console.error('Error loading markdown:', error);
       }
     }
 
-    // Language button click handler
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const lang = btn.dataset.lang;
         if (lang === currentLang) return;
-        
-        // Update active button
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        
         currentLang = lang;
         loadMarkdown(lang);
       });
     });
 
-    // Initial load
     loadMarkdown(currentLang);
   </script>
 </body>

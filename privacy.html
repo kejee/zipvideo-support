@@ -236,12 +236,21 @@
     }
 
     /* Responsive */
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .container { padding: 10px 16px 40px; }
+      .header { padding: 30px 0 10px; }
+      .header h1 { font-size: 22px; }
+      .markdown-body h1 { font-size: 24px; }
+      .lang-btn { padding: 8px 16px; font-size: 13px; }
+    }
+
+    @media (max-width: 480px) {
       .header h1 { font-size: 20px; }
       .content { padding: 16px; }
-      .markdown-body h1 { font-size: 22px; }
+      .markdown-body h1 { font-size: 20px; }
       .markdown-body h2 { font-size: 18px; }
       .markdown-body table { font-size: 12px; }
+      .app-icon { width: 64px; height: 64px; }
     }
   </style>
 </head>

@@ -11,12 +11,16 @@
 ## 文档
 
 - **[支持与帮助](support.html)**: 常见问题解答与故障排除。
-- **[隐私政策](privacy.html)**: 我们如何处理您的数据（提示：所有处理均在本地完成，零上传）。
+- **[隐私政策](privacy.html)**: 了解我们如何保护您的数据。
 
-## 相关链接
+## 下载安装
 
-- **主仓库**: [kejee/zip_video](https://github.com/kejee/zip_video)
-- **官方支持页面**: [ZipVideo Support](https://kejee.github.io/zipvideo-support/)
+ZipVideo 支持以下移动平台：
+
+- [**App Store**](#) (iOS)
+- [**Google Play**](#) (Android)
+
+- **官方页面**: [ZipVideo 产品主页](https://kejee.github.io/zipvideo-support/)
 
 ---
 

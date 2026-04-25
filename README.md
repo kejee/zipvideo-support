@@ -11,12 +11,16 @@ Official support and legal documentation repository for **ZipVideo**, a high-eff
 ## Documents
 
 - **[Support & Help](support.html)**: Frequently asked questions and troubleshooting.
-- **[Privacy Policy](privacy.html)**: How we handle your data (Hint: We don't! Everything is local).
+- **[Privacy Policy](privacy.html)**: How we handle your data.
 
-## Links
+## Download
 
-- **Main Repository**: [kejee/zip_video](https://github.com/kejee/zip_video)
-- **Official Website**: [ZipVideo Support](https://kejee.github.io/zipvideo-support/)
+ZipVideo is available on major mobile platforms:
+
+- [**App Store**](#) (iOS)
+- [**Google Play**](#) (Android)
+
+- **Official Website**: [ZipVideo Landing Page](https://kejee.github.io/zipvideo-support/)
 
 ---
 
