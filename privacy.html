@@ -172,10 +172,27 @@
     }
 
     .markdown-body table {
+      display: block;
       width: 100%;
+      overflow-x: auto;
       border-collapse: collapse;
       font-size: 14px;
       margin: 12px 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .markdown-body th {
+      background: var(--primary);
+      color: white;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .markdown-body td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
     }
 
     .markdown-body th {
